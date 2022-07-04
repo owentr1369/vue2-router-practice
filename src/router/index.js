@@ -1,11 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import AboutView from "../views/AboutView.vue";
-import TeamView from "../views/TeamView.vue";
-import ContactView from "../views/ContactView.vue";
-import TeamProfile from "../components/TeamProfile.vue";
-import TeamProjects from "../components/TeamProjects.vue";
 
 Vue.use(VueRouter);
 
@@ -13,38 +7,43 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: HomeView,
+    component: () =>
+      import(/* webpackChunkName: "js/routes/foo" */ "../views/HomeView.vue"),
   },
   {
     path: "/about",
     name: "About",
-    component: AboutView,
+    component: () =>
+      import(/* webpackChunkName: "js/routes/foo" */ "../views/AboutView.vue"),
   },
   {
     path: "/team",
     name: "Team",
-    component: TeamView,
+    // component: TeamView,
     children: [
       {
         // UserProfile will be rendered inside User's <router-view>
         // when /user/:id/profile is matched
         path: "/team/profile",
         name: "Team Profile",
-        component: TeamProfile,
+        component: () =>
+          import(
+            /* webpackChunkName: "js/routes/foo" */ "../views/AboutView.vue"
+          ),
       },
       {
         // UserPosts will be rendered inside User's <router-view>
         // when /user/:id/posts is matched
         path: "/team/projects",
         name: "Team Projects",
-        component: TeamProjects,
+        // component: TeamProjects,
       },
     ],
   },
   {
     path: "/contact",
     name: "Contact",
-    component: ContactView,
+    // component: ContactView,
   },
 ];
 
