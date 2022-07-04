@@ -36,4 +36,9 @@ const router = new VueRouter({
   routes,
 });
 
+router.beforeEach((to, from, next) => {
+  document.title = `${to.name} | Vue.js`;
+  next();
+});
+
 export default router;
